@@ -1,0 +1,64 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/aliburhanguncan/Desktop/00-Dosyalar/10-Siliconmade/Platinummade/Homeworks/Homework3/aspnet-mvc-blog/Blog.Web.Mvc/Blog.Web.Mvc.csproj": {}
+  },
+  "projects": {
+    "/Users/aliburhanguncan/Desktop/00-Dosyalar/10-Siliconmade/Platinummade/Homeworks/Homework3/aspnet-mvc-blog/Blog.Web.Mvc/Blog.Web.Mvc.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/aliburhanguncan/Desktop/00-Dosyalar/10-Siliconmade/Platinummade/Homeworks/Homework3/aspnet-mvc-blog/Blog.Web.Mvc/Blog.Web.Mvc.csproj",
+        "projectName": "Blog.Web.Mvc",
+        "projectPath": "/Users/aliburhanguncan/Desktop/00-Dosyalar/10-Siliconmade/Platinummade/Homeworks/Homework3/aspnet-mvc-blog/Blog.Web.Mvc/Blog.Web.Mvc.csproj",
+        "packagesPath": "/Users/aliburhanguncan/.nuget/packages/",
+        "outputPath": "/Users/aliburhanguncan/Desktop/00-Dosyalar/10-Siliconmade/Platinummade/Homeworks/Homework3/aspnet-mvc-blog/Blog.Web.Mvc/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/aliburhanguncan/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
