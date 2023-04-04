@@ -30,6 +30,22 @@ public class Program
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
 
+        // /category/aaa-bbb
+        app.MapControllerRoute(
+            name: "category",
+            pattern: "{controller=Category}/{category}-{slug}/{action=Index}");
+
+        // /blog/title-aaa
+        app.MapControllerRoute(
+            name: "blog",
+            pattern: "{controller=Blog}/{title}-{slug}/{action=Detail}");
+
+        // /page/title-aaa
+        app.MapControllerRoute(
+            name: "page",
+            pattern: "{controller=Page}/{title}-{slug}/{action=Detail}");
+
+
         app.Run();
     }
 }
