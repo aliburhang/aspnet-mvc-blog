@@ -1,0 +1,37 @@
+﻿https: //localhost:7018/home/index
+
+https: //localhost:7018/home/privacy
+
+https: //localhost:7018/auth/register
+
+https: //localhost:7018/auth/login
+
+https: //localhost:7018/auth/forgotPassword
+
+https: //localhost:7018/blog/search
+
+https: //localhost:7018/blog/detail
+
+https: //localhost:7018/category/index
+
+https: //localhost:7018/page/detail
+
+https: //localhost:7018/category/category-slug
+
+https: //localhost:7018/blog/title-slug
+
+https: //localhost:7018/page/title-slug
+
+https: //localhost:7018/admin/blog/index
+
+https: //localhost:7018/admin/category/index
+
+https: //localhost:7018/admin/home/index
+
+https: //localhost:7018/admin/page/index
+
+https: //localhost:7018/admin/setting/index
+
+https: //localhost:7018/admin/user/index
+
+
