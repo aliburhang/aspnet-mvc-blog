@@ -1,4 +1,8 @@
-﻿namespace Blog.Web.Mvc;
+﻿using Blog.Web.Mvc;
+using Blog.Web.Mvc.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace Blog.Web.Mvc;
 
 public class Program
 {
@@ -8,8 +12,23 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
+        //builder.Services.AddDbContext<AppDbContext>();
+        builder.Services.AddDbContext<AppDbContext>(options =>
+        {
+            var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
+
+            options.UseSqlServer(connectionString);
+        });
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+        }
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
