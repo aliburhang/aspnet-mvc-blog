@@ -12,11 +12,10 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
-        //builder.Services.AddDbContext<AppDbContext>();
+
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultMac");
-
+            var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
             options.UseSqlServer(connectionString);
         });
 
@@ -67,7 +66,6 @@ public class Program
         app.MapControllerRoute(
             name: "areas",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
 
         app.Run();
     }

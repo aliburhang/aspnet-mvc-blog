@@ -18,22 +18,11 @@ namespace Blog.Web.Mvc.Data
         public DbSet<Setting> Settings { get; set; }
         public DbSet<User> Users { get; set; }
 
-
         //  2. Veritabanı Konfigrasyonu
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        //{
-        //    //string connectionString = "Server=(localdb)\\MSSQLLocalDb; Database=AspNetMvcBlog;";
-        //    string connectionString = "Server=localhost,1433; Database=AspNetMvcBlog; User Id=sa; Password=SiliconMade123..; TrustServerCertificate=True;";
-        //    builder.UseSqlServer(connectionString);
-        //    base.OnConfiguring(builder);
-        //}
-
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
