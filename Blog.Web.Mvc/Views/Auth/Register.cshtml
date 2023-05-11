@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Auth - Register";
-    Layout = "_Layout2";
 }
 
 @model RegisterViewModel
@@ -12,26 +11,27 @@
             <form asp-action="Register">
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Name</label>
-                    <input class="form-control" asp-for="Name">
+                    <label for="name" class="form-label">Name</label>
+                    <input class="form-control" asp-for="Name" name="name" id="name" type="text" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Surname</label>
-                    <input class="form-control" asp-for="SurName">
+                    <label for="surname" class="form-label">Surname</label>
+                    <input class="form-control" asp-for="SurName" name="surname" id="surname" type="text" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input class="form-control" asp-for="EmailAddress">
+                    <input class="form-control" asp-for="EmailAddress" name="email" id="email" type="email" required>
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input class="form-control" asp-for="Password">
+                    <input class="form-control" asp-for="Password" name="password" id="password" type="password" required>
                 </div>
 
-                <input type="submit" value="Sign up" class="btn btn-primary" />
+                <button class="btn btn-primary solid blank mt-1 mb-3" type="submit">Sign Up</button>
+
             </form>
         </div>
     </div>
