@@ -37,7 +37,7 @@
 
                                 @foreach (var item in Model)
                                 {
-                                    <a class="dropdown-item" asp-controller="Category" asp-route-slug="@item.Name">@item.Name</a>
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Index" asp-route-slug="@item.Name">@item.Name</a>
                                 }
                             </div>
                         </li>
