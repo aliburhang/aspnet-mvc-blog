@@ -32,13 +32,13 @@ namespace Blog.Web.Mvc.Data
         public static void SeedCategoryPosts(ModelBuilder modelBuilder)
         {
             var categoryPosts = new List<CategoryPost>();
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 20; i++)
             {
                 categoryPosts.Add(new CategoryPost
                 {
                     Id = i,
                     CategoryId = Random.Shared.Next(1, 3),
-                    PostId = Random.Shared.Next(1, 100),
+                    PostId = Random.Shared.Next(1, 20),
                 });
             }
             modelBuilder.Entity<CategoryPost>().HasData(categoryPosts);
@@ -63,7 +63,7 @@ namespace Blog.Web.Mvc.Data
         public static void SeedPosts(ModelBuilder modelBuilder)
         {
             var posts = new List<Post>();
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 20; i++)
             {
                 posts.Add(new Post
                 {
@@ -84,7 +84,7 @@ namespace Blog.Web.Mvc.Data
                 postComments.Add(new PostComment
                 {
                     Id = i,
-                    PostId = Random.Shared.Next(1, 100),
+                    PostId = Random.Shared.Next(1, 20),
                     UserId = Random.Shared.Next(1,8),
                     Comment = "Comment " + i,
                     IsActive = true,
@@ -101,7 +101,7 @@ namespace Blog.Web.Mvc.Data
                 postImages.Add(new PostImage
                 {
                     Id = i,
-                    PostId = Random.Shared.Next(1, 100),
+                    PostId = Random.Shared.Next(1, 20),
                     ImagePath = "Link " ,
                 });
             }
