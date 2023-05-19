@@ -15,7 +15,7 @@ public class Program
 
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultMac");
             options.UseSqlServer(connectionString);
         });
 

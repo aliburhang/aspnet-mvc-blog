@@ -23,9 +23,9 @@ namespace Blog.Web.Mvc.Data
         {
             modelBuilder.Entity<Category>().HasData(new List<Category>
             {
-                new() { Id = 1, Name = "Elektronik"},
-                new() { Id = 2, Name = "Kitap"},
-                new() { Id = 3, Name = "Giyim"},
+                new() { Id = 1, Name = "Elektronik", Slug="Elektronik"},
+                new() { Id = 2, Name = "Kitap", Slug="Kitap"},
+                new() { Id = 3, Name = "Giyim", Slug="Giyim"},
             });
         }
 
@@ -71,6 +71,7 @@ namespace Blog.Web.Mvc.Data
                     UserId = i,
                     Title = "Post Title " + i,
                     Content = "Post content " + i,
+                    CategoryId = Random.Shared.Next(1, 4),
                 });
             }
             modelBuilder.Entity<Post>().HasData(posts);

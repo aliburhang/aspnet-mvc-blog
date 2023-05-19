@@ -19,6 +19,16 @@ namespace Blog.Web.Mvc.Data.Entity
 
         [Required]
         public string? Content { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public Category? Category { get; set; }
+
+        //public PostImage? PostImage { get; set; }
+
+        public List<PostComment>? PostComment { get; set; }
+
+
     }
 }
 

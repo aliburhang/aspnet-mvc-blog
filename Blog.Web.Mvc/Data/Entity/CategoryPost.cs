@@ -15,6 +15,8 @@ namespace Blog.Web.Mvc.Data.Entity
 
         [Required]
         public int PostId { get; set; }
+
+        public Category? Category { get; set; }
     }
 }
 

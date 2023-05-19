@@ -22,6 +22,9 @@ namespace Blog.Web.Mvc.Data.Entity
 
         [Required]
         public bool IsActive { get; set; }
+
+
+
     }
 }
 
