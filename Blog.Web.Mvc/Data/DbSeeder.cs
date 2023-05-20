@@ -68,7 +68,7 @@ namespace Blog.Web.Mvc.Data
                 posts.Add(new Post
                 {
                     Id = i,
-                    UserId = i,
+                    UserId = Random.Shared.Next(1, 8),
                     Title = "Post Title " + i,
                     Content = "Post content " + i,
                     CategoryId = Random.Shared.Next(1, 4),
@@ -129,13 +129,13 @@ namespace Blog.Web.Mvc.Data
         {
             modelBuilder.Entity<User>().HasData(new List<User>
             {
-                new() { Id = 1, Email = "guncan@gmail.com", Password = "guncan", Name = "Ali Burhan Güncan", City = "Mersin", Phone = "+905000000000"},
-                new() { Id = 2, Email = "kılıc@gmail.com", Password = "kılıc", Name = "Murat Esat Kılıç", City = "Ankara", Phone = "+905000000000"},
-                new() { Id = 3, Email = "aras@gmail.com", Password = "aras", Name = "Ümit Can Aras", City = "Mersin", Phone = "+905000000000"},
-                new() { Id = 4, Email = "gencer@gmail.com", Password = "gencer", Name = "Kerem Gencer", City = "Mersin", Phone = "+905000000000"},
-                new() { Id = 5, Email = "coskun@gmail.com", Password = "coskun", Name = "Onur Eymen Coşkun", City = "Mersin", Phone = "+905000000000"},
-                new() { Id = 6, Email = "gunduzoglu@gmail.com", Password = "gunduzoglu", Name = "Cem Gündüzoğlu", City = "Mersin", Phone = "+905000000000"},
-                new() { Id = 7, Email = "yilmaz@gmail.com", Password = "yilmaz", Name = "Muhammet Yılmaz", City = "Mersin", Phone = "+905000000000"},
+                new() { Id = 1, Email = "guncan@gmail.com", Password = "guncan", Name = "Ali Burhan Güncan", City = "Mersin", Phone = "+905000000000", Definition="My name is Ali Burhan Güncan, i am from Mersin"},
+                new() { Id = 2, Email = "kılıc@gmail.com", Password = "kılıc", Name = "Murat Esat Kılıç", City = "Ankara", Phone = "+905000000000", Definition="My name is Murat Esat Kılıç, i am from Ankara"},
+                new() { Id = 3, Email = "aras@gmail.com", Password = "aras", Name = "Ümit Can Aras", City = "Ankara", Phone = "+905000000000", Definition="My name is Ümit Can Aras, i am from Ankara"},
+                new() { Id = 4, Email = "gencer@gmail.com", Password = "gencer", Name = "Kerem Gencer", City = "İstanbul", Phone = "+905000000000", Definition="My name is Kerem Gencer, i am from İstanbul"},
+                new() { Id = 5, Email = "coskun@gmail.com", Password = "coskun", Name = "Onur Eymen Coşkun", City = "İstanbul", Phone = "+905000000000", Definition="My name is Onur Eymen Coşkun, i am from İstanbul"},
+                new() { Id = 6, Email = "gunduzoglu@gmail.com", Password = "gunduzoglu", Name = "Cem Gündüzoğlu", City = "İstanbul", Phone = "+905000000000", Definition="My name is Cem Gündüzoğlu, i am from İstanbul"},
+                new() { Id = 7, Email = "yilmaz@gmail.com", Password = "yilmaz", Name = "Muhammet Yılmaz", City = "İstanbul", Phone = "+905000000000", Definition="My name is Muhammet Yılmaz, i am from İstanbul"},
             });
         }
 

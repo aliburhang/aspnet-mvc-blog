@@ -24,7 +24,9 @@ namespace Blog.Web.Mvc.Data.Entity
 
         public Category? Category { get; set; }
 
-        //public PostImage? PostImage { get; set; }
+        //public User? User { get; set; }
+
+        public List<PostImage>? PostImage { get; set; }
 
         public List<PostComment>? PostComment { get; set; }
 

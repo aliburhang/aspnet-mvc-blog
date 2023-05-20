@@ -25,6 +25,13 @@ namespace Blog.Web.Mvc.Data.Entity
 
         [Required, Column(TypeName = "varchar(20)")]
         public string? Phone { get; set; }
+
+        [Required, Column(TypeName = "varchar(300)")]
+        public string? Definition { get; set; }
+
+        //public List<Post>? Post { get; set; }
+
+        public List<PostComment>? PostComment { get; set; }
     }
 }
 

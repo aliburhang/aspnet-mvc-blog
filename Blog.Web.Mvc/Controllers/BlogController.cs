@@ -39,7 +39,27 @@ namespace Blog.Web.Mvc.Controllers
 
         public IActionResult Detail(int id)
         {
-            return View();
+            var categoryNames = _context.Categories.Include(e => e.Posts).ToList();
+            ViewBag.CategoryNames = categoryNames;
+
+            var post = _context.Posts
+                .Include(e => e.Category)
+                .Include(e => e.PostImage)
+                .Where(e => e.Id == id)
+                .FirstOrDefault();
+
+            ViewBag.PostComments = _context.PostComments
+                .Include(e => e.User)
+                .Where(e => e.PostId == id)
+                .ToList();
+
+            var userId = _context.Posts.Where(e => e.Id == id).FirstOrDefault().UserId;
+            ViewBag.User = _context.Users.Where(e => e.Id == userId).FirstOrDefault();
+
+            ViewBag.NextPost = _context.Posts.OrderBy(e => e.Id).Where(e => e.Id > id).FirstOrDefault();
+            ViewBag.PreviousPost = _context.Posts.OrderBy(e => e.Id).Where(e => e.Id < id).LastOrDefault();
+
+            return View(post);
         }
     }
 }

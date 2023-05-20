@@ -31,7 +31,7 @@
                                     <img src="/images/news/f1.jpg" alt="" class="img-fluid w-100">
                                 </div>
                                 <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1">@item.Title</span>
-                                <h3 class="post-title mt-1"><a href="blog-single.html">@item.Content</a></h3>
+                                <h3 class="post-title mt-1"><a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" >@item.Content</a></h3>
 
                                 <span class=" text-muted  text-capitalize">@item.CreatedAt.ToShortDateString()</span>
 
