@@ -70,8 +70,16 @@ namespace Blog.Web.Mvc.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            if (model.EmailAddress == "abg@gmail.com" &&
-                model.Password == "123")
+            var user = _context.Users.FirstOrDefault(e =>e.Email == model.EmailAddress && e.Password == model.Password);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("EmailAddress", "Email could not be found!");
+                return View(model);
+            }
+
+            if (model.EmailAddress == user.Email &&
+                model.Password == user.Password)
             {
                 var cookieOptions = new CookieOptions()
                 {

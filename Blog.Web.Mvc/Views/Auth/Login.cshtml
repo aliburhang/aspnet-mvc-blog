@@ -15,6 +15,7 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input class="form-control" asp-for="EmailAddress" id="email" type="email" required placeholder="name@example.com">
+                    <span class="text-danger" asp-validation-for="EmailAddress"></span>
                 </div>
 
                 <div class="mb-3">
