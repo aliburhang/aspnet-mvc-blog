@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Web.Mvc.Data;
+using Blog.Web.Mvc.Data.Entity;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
@@ -12,10 +14,51 @@ namespace Blog.Web.Mvc.Controllers
 {
     public class AuthController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Register()
+        private readonly AppDbContext _context;
+
+        public AuthController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public IActionResult Register() => View();
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userDb = _context.Users.FirstOrDefault(e => e.Email == model.EmailAddress);
+                if (userDb != null)
+                {
+                    ModelState.AddModelError("EmailAddress", "Email exists!");
+                    return View(model);
+                }
+
+                if (model.Password != model.Password2)
+                {
+                    ModelState.AddModelError("Password", "Passwords does not match!");
+                    return View(model);
+                }
+
+                var newUser = new User()
+                {
+                    Email = model.EmailAddress,
+                    Password = model.Password,                   
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    City = model.City,
+                    Phone = model.Phone,
+                };
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+
+                return RedirectToAction("RegisterSuccess");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         // /auth/login
@@ -45,6 +88,8 @@ namespace Blog.Web.Mvc.Controllers
                 return View(model);
             }
         }
+
+        public IActionResult RegisterSuccess() => View();
 
         public IActionResult Logout()
         {
