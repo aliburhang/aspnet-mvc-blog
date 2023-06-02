@@ -13,6 +13,15 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
+        // Session servisini ekle
+        builder.Services.AddSession(options =>
+        {
+            options.Cookie.Name = ".Siliconmade.Session";
+
+            options.Cookie.HttpOnly = true;
+            options.Cookie.IsEssential = true;
+        });
+
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             var connectionString = builder.Configuration.GetConnectionString("DefaultMac");
@@ -39,6 +48,9 @@ public class Program
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
+
+        // Session Kullan
+        app.UseSession();
 
         app.UseRouting();
 
