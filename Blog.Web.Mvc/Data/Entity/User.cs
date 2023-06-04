@@ -35,6 +35,13 @@ namespace Blog.Web.Mvc.Data.Entity
         //public List<Post>? Post { get; set; }
 
         public List<PostComment>? PostComment { get; set; }
+
+        [MaxLength(100)]
+        public string? ActivationCode { get; set; }
+
+        public bool IsActive { get; set; } = false;
+
+        public string? Roles { get; set; }
     }
 }
 

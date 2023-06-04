@@ -21,11 +21,12 @@
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input class="form-control" asp-for="Password" id="password" type="password" required placeholder="Password">
+                    <span class="text-danger" asp-validation-for="Password"></span>
                 </div>
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" asp-for="RememberMe"> Remember me
                     </label>
                 </div>
 

@@ -1,5 +1,6 @@
 ﻿@model List<Category>
 
+
 <header class="header-top bg-grey justify-content-center">
     <nav class="navbar navbar-expand-lg navigation">
         <div class="container">
@@ -47,11 +48,11 @@
                         </div>
                     </li>
 
-                    @if (AuthHelper.Base64Decode(Context.Request.Cookies["IsLoggedIn"]) == "1")
+                    @if (Context.User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @AuthHelper.Base64Decode(Context.Request.Cookies["Username"])
+                                @Context.User.FindFirst(ClaimTypes.Email).Value
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
                                 <a class="dropdown-item" href="#">Profile</a>

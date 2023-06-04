@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Blog.Web.Mvc.Data;
 using Blog.Web.Mvc.Data.Entity;
 using Blog.Web.Mvc.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
@@ -44,7 +47,7 @@ namespace Blog.Web.Mvc.Controllers
                 var newUser = new User()
                 {
                     Email = model.EmailAddress,
-                    Password = model.Password,                   
+                    Password = model.Password,
                     Name = model.Name,
                     Surname = model.Surname,
                     City = model.City,
@@ -68,41 +71,78 @@ namespace Blog.Web.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = "")
         {
-            var user = _context.Users.FirstOrDefault(e =>e.Email == model.EmailAddress && e.Password == model.Password);
-
-            if (user == null)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("EmailAddress", "Email could not be found!");
-                return View(model);
-            }
+                var user = _context.Users.FirstOrDefault(e => e.Email == model.EmailAddress);
 
-            if (model.EmailAddress == user.Email &&
-                model.Password == user.Password)
-            {
-                var cookieOptions = new CookieOptions()
+                if (user == null)
                 {
-                    Expires = DateTime.Now.AddDays(7)
-                };
-                Response.Cookies.Append("Username", AuthHelper.Base64Encode(model.EmailAddress), cookieOptions);
-                Response.Cookies.Append("IsLoggedIn", AuthHelper.Base64Encode("1"), cookieOptions);
+                    ModelState.AddModelError("EmailAddress", "Email could not be found!");
+                    return View(model);
+                }
 
-                return Redirect("/");
+                if (user.IsActive == false)
+                {
+                    ModelState.AddModelError("EmailAddress", "User is not active!");
+                    return View(model);
+                }
+
+                if (user.Password != model.Password)
+                {
+                    ModelState.AddModelError("Password", "Password is wrong!");
+                    return View(model);
+                }
+
+                // Kimlik Bilgileri
+                var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name, user.Name ?? ""),
+                        new Claim(ClaimTypes.GivenName, user.Name ?? ""),
+                        new Claim(ClaimTypes.Surname, user.Surname ?? ""),
+                        new Claim(ClaimTypes.Email, model.EmailAddress)
+                    };
+
+                if (!string.IsNullOrEmpty(user.Roles))
+                {
+                    string[] roles = user.Roles.Split(',');
+                    foreach (var role in roles)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, role));
+                    }
+                }
+
+                // Kimlik
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                // Cüzdan
+                var principal = new ClaimsPrincipal(identity);
+
+                var props = new AuthenticationProperties()
+                {
+                    IsPersistent = model.RememberMe,
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(15),
+                };
+
+                await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        principal,
+                        props
+                    );
+
+                return Redirect(returnUrl != "" ? returnUrl : "/");
             }
-            else
-            {
-                ViewBag.Message = "Username or Password is wrong!";
-                return View(model);
-            }
+
+            return View(model);
         }
 
         public IActionResult RegisterSuccess() => View();
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            Response.Cookies.Delete("Username");
-            Response.Cookies.Delete("IsLoggedIn");
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return Redirect("/");
         }

@@ -1,5 +1,6 @@
 ﻿using Blog.Web.Mvc;
 using Blog.Web.Mvc.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Mvc;
@@ -13,14 +14,15 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
-        // Session servisini ekle
-        builder.Services.AddSession(options =>
-        {
-            options.Cookie.Name = ".Siliconmade.Session";
-
-            options.Cookie.HttpOnly = true;
-            options.Cookie.IsEssential = true;
-        });
+        // Authentication servisini ekle
+        builder.Services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(o =>
+            {
+                o.Cookie.Name = "Siliconmade.Cookie";
+                o.LoginPath = "/Auth/Login";
+                o.AccessDeniedPath = "/Auth/AccessDenied";
+            });
 
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
@@ -34,7 +36,7 @@ public class Program
         {
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
 
@@ -49,8 +51,9 @@ public class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
-        // Session Kullan
-        app.UseSession();
+        // Authentication ve Authorization kullan
+        app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseRouting();
 
