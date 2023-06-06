@@ -129,7 +129,7 @@ namespace Blog.Web.Mvc.Data
         {
             modelBuilder.Entity<User>().HasData(new List<User>
             {
-                new() { Id = 1, Email = "guncan@gmail.com", Password = "guncan", Name = "Ali Burhan Güncan", City = "Mersin", Phone = "+905000000000", Definition="My name is Ali Burhan Güncan, i am from Mersin", IsActive=true},
+                new() { Id = 1, Email = "33aliburhan@gmail.com", Password = "guncan", Name = "Ali Burhan Güncan", City = "Mersin", Phone = "+905000000000", Definition="My name is Ali Burhan Güncan, i am from Mersin", IsActive=true},
                 new() { Id = 2, Email = "kılıc@gmail.com", Password = "kılıc", Name = "Murat Esat Kılıç", City = "Ankara", Phone = "+905000000000", Definition="My name is Murat Esat Kılıç, i am from Ankara",IsActive=true},
                 new() { Id = 3, Email = "aras@gmail.com", Password = "aras", Name = "Ümit Can Aras", City = "Ankara", Phone = "+905000000000", Definition="My name is Ümit Can Aras, i am from Ankara",IsActive=true},
                 new() { Id = 4, Email = "gencer@gmail.com", Password = "gencer", Name = "Kerem Gencer", City = "İstanbul", Phone = "+905000000000", Definition="My name is Kerem Gencer, i am from İstanbul",IsActive=true},

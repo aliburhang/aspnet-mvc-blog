@@ -1,5 +1,6 @@
 ﻿using Blog.Web.Mvc;
 using Blog.Web.Mvc.Data;
+using Blog.Web.Mvc.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,9 +25,12 @@ public class Program
                 o.AccessDeniedPath = "/Auth/AccessDenied";
             });
 
+        builder.Services.AddSingleton<EmailService>();
+        builder.Services.AddTransient<UserService>();
+
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultMac");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
             options.UseSqlServer(connectionString);
         });
 
