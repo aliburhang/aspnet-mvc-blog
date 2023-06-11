@@ -40,7 +40,7 @@ public class Program
         {
             var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            //context.Database.EnsureDeleted();
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
         }
 

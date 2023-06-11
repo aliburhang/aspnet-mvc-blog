@@ -10,6 +10,7 @@ using Blog.Web.Mvc.Models;
 using Blog.Web.Mvc.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
@@ -157,7 +158,7 @@ namespace Blog.Web.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult ForgotPassword(ForgotPasswordViewModel model)
+        public IActionResult ForgotPassword(ResetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -169,7 +170,7 @@ namespace Blog.Web.Mvc.Controllers
                     return View(model);
                 }
 
-                _userService.SendResetEmail(model.EmailAddress);
+                _userService.SendResetEmail(model.EmailAddress, user.Email);
 
                 return RedirectToAction("ForgotPasswordSuccess");
             }
@@ -181,22 +182,30 @@ namespace Blog.Web.Mvc.Controllers
 
         public IActionResult ForgotPasswordSuccess() => View();
 
-        public IActionResult ResetPassword() => View();
+        //string route = AuthHelper.Base64Encode("ResetPassword");
+        //[Route("{auth}/{route}")]
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string EmailAddress)
+        {
+            if (EmailAddress == null)
+            {
+                ModelState.AddModelError("", "Invalid email adress.");
+            }
+            return View();
+        }
+
 
         [HttpPost]
-        public IActionResult ResetPassword(ForgotPasswordViewModel model)
+        [AllowAnonymous]
+        public IActionResult ResetPassword(ResetPasswordViewModel model)
         {
+            var user = _context.Users.FirstOrDefault(e => e.Email == model.EmailAddress);
 
             if (ModelState.IsValid)
             {
-                var user = _context.Users.FirstOrDefault(e => e.Email == model.EmailAddress);
-
-                if (user == null)
-                {
-                    ModelState.AddModelError("EmailAddress", "Email could not be found!");
-                    return View(model);
-                }
-
+                
                 if (model.Password != model.Password2)
                 {
                     ModelState.AddModelError("Password", "Passwords does not match!");
@@ -209,11 +218,13 @@ namespace Blog.Web.Mvc.Controllers
                     return View(model);
                 }
 
-                user.Password = model.Password;
-                _context.SaveChanges();
+                if (model.Password != null)
+                {
+                    user.Password = model.Password;
+                    _context.SaveChanges();
 
-                return RedirectToAction("ResetPasswordSuccess");
-
+                    return RedirectToAction("ResetPasswordSuccess");
+                }
             }
 
             return View(model);

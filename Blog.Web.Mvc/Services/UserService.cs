@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net.Mail;
+using Blog.Web.Mvc.Models;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Mvc.Services
@@ -12,9 +15,9 @@ namespace Blog.Web.Mvc.Services
             _emailService = emailService;
         }
 
-        public void SendResetEmail(string email)
+        public void SendResetEmail(string email, string EmailAddress)
         {
-            var mailLink = "https://localhost:7018/Auth/ResetPassword?emailAddress";
+            var mailLink = "https://localhost:7018/Auth/ResetPassword/?EmailAddress=" + EmailAddress;
 
             _emailService.Send(email, "BlogWebMvc - Reset Password", @$"
                 <style>body {{ font-family: Arial; font-size: 16px; }}</style>
