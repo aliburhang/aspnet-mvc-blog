@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Blog.Web.Mvc.Data.Entity.Abstract
+namespace App.Data.Entity.Abstract
 {
     public abstract class AuditEntity
     {

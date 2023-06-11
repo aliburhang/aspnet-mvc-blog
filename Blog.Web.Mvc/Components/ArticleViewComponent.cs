@@ -1,4 +1,4 @@
-﻿using Blog.Web.Mvc.Data;
+﻿using App.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Web.Mvc.Components;

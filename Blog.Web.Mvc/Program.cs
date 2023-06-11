@@ -1,5 +1,5 @@
 ﻿using Blog.Web.Mvc;
-using Blog.Web.Mvc.Data;
+using App.Data;
 using Blog.Web.Mvc.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,8 @@ public class Program
 
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
-            var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
+            //var connectionString = builder.Configuration.GetConnectionString("DefaultWindows");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultMac");
             options.UseSqlServer(connectionString);
         });
 

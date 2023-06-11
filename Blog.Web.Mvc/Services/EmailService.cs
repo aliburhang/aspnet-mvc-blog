@@ -12,7 +12,7 @@ namespace Blog.Web.Mvc.Services
             {
                 // Cem hoca Username: 3fcb198edaf1e4  Password:  1818d6d691d359
                 // Ali Burhan Username: f36c9b1690b89a  Password:  173067f30c9825
-                Credentials = new NetworkCredential("3fcb198edaf1e4", "1818d6d691d359"),
+                Credentials = new NetworkCredential("f36c9b1690b89a", "173067f30c9825"),
                 EnableSsl = true
             };
 

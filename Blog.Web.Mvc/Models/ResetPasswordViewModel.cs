@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Blog.Web.Mvc.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Web.Mvc.Models;
